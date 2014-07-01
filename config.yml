@@ -1,0 +1,20 @@
+# MySQL credentials
+mysql:
+  host:
+  database:
+  username:
+  password:
+  table: 'friends'
+  # For the friends to be stored in 
+# Worlds BarAPI is enabled in
+worlds:
+# This will at some point hold friendme data
+data:
+# Whether friends can attack friends
+friendly-fire: true
+# Whether BarAPI is enabled
+bar-api: true
+# Message for the Bar API
+bar-message: ''
+# How often to unload and load with the database
+unload-count: 1000

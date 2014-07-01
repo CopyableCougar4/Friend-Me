@@ -1,0 +1,11 @@
+name: FriendMe
+main: me.CopyableCougar4.main.FriendMe
+version: 3.3
+commands:
+  friend:
+    description: FriendMe base command
+    permission: friendme.user
+permissions:
+  friendme.user:
+    description: Basic FriendMe permission
+    default: true
