@@ -56,7 +56,7 @@ public class MySQL_Loader {
 				}
 				load();
 			}
-		}, 0, Long.parseLong(FriendMe.getPlugin().getConfig().getString("reload-count")));
+		}, 0, FriendMe.getPlugin().getConfig().getLong("reload-count"));
 	}
 	
 	/**

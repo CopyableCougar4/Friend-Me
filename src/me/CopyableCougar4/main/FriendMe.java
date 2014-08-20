@@ -8,6 +8,7 @@ import java.util.List;
 
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
+import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -26,16 +27,17 @@ public class FriendMe extends JavaPlugin implements Listener {
 		for(String s : data){
 			String[] split = s.split(",");
 			String send = split[0];
-			Player sender = Bukkit.getPlayer(send);
+			Player sender = Bukkit.getPlayer(MineUUID.getUUID(send));
 			String receive = split[1];
-			Player receiver = Bukkit.getPlayer(receive);
+			Player receiver = Bukkit.getPlayer(MineUUID.getUUID(receive));
 			friendships.add(Friendship.create(sender, receiver));
 		}
 	}
 	
 	public void findConfig(){
-		File f = new File(this.getDataFolder() + "/config.yml");
-		if(!f.exists())
+		File dataFolder = this.getDataFolder();
+		File config = new File(dataFolder, "config.yml");
+		if(!config.exists())
 			this.saveDefaultConfig();
 	}
 	
@@ -60,6 +62,22 @@ public class FriendMe extends JavaPlugin implements Listener {
 		unloadFriendships();
 	}
 	
+	public static boolean isFriend(Player initial, OfflinePlayer possible){
+		for(Friendship f : friendships){
+			if(f.getSender().getUniqueId().equals(initial.getUniqueId())){
+				if(f.getReceiver().getUniqueId().equals(possible.getUniqueId())){
+					return true;
+				}
+			}
+			if(f.getReceiver().getUniqueId().equals(initial.getUniqueId())){
+				if(f.getSender().getUniqueId().equals(possible.getUniqueId())){
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+	
 	public void onEnable(){
 		pl = this;
 		findConfig();
@@ -73,6 +91,7 @@ public class FriendMe extends JavaPlugin implements Listener {
 		Bukkit.getPluginManager().registerEvents(new FriendMeEvents(), this);
 		Bukkit.getPluginManager().registerEvents(new FriendChat(), this);
 		Bukkit.getPluginCommand("friend").setExecutor(new FriendCommand());
+		FriendHider.schedule();
 		// create the mysql table if it doesn't exist
 		String host = getConfig().getString("mysql.host");
 		String database = getConfig().getString("mysql.database");

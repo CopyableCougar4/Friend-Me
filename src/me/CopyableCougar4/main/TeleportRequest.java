@@ -40,8 +40,8 @@ public class TeleportRequest {
 	}
 	
 	public static TeleportRequest create(String player, CommandSender sender){
-		Player from = Bukkit.getPlayer(sender.getName());
-		Player to = Bukkit.getPlayer(player);
+		Player from = Bukkit.getPlayer(MineUUID.getUUID(sender.getName()));
+		Player to = Bukkit.getPlayer(MineUUID.getUUID(player));
 		TeleportRequest request = new TeleportRequest(from, to);
 		return request;
 	}

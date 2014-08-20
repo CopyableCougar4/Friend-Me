@@ -1,6 +1,6 @@
 name: FriendMe
 main: me.CopyableCougar4.main.FriendMe
-version: 3.3
+version: 3.3.3
 commands:
   friend:
     description: FriendMe base command

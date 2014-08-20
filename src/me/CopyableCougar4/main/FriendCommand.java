@@ -28,25 +28,25 @@ public class FriendCommand implements CommandExecutor {
 		}
 		if(args[0].equalsIgnoreCase("add")){
 			if(args.length > 1)
-				Request.send((Player)sender, Bukkit.getPlayer(args[0]));
+				Request.send((Player)sender, Bukkit.getPlayer(MineUUID.getUUID(args[1])));
 			else
 				FriendMe.sendMessage((Player)sender, Type.INVALID_COMMAND, null);
 		}
 		else if(args[0].equalsIgnoreCase("deny")){
 			if(args.length > 1)
-				Request.deny((Player)sender, Bukkit.getPlayer(args[0]));
+				Request.deny((Player)sender,  Bukkit.getPlayer(MineUUID.getUUID(args[1])));
 			else
 				FriendMe.sendMessage((Player)sender, Type.INVALID_COMMAND, null);
 		}
 		else if(args[0].equalsIgnoreCase("accept")){
 			if(args.length > 1)
-				Request.accept((Player)sender, Bukkit.getPlayer(args[0]));
+				Request.accept((Player)sender, Bukkit.getPlayer(MineUUID.getUUID(args[1])));
 			else
 				FriendMe.sendMessage((Player)sender, Type.INVALID_COMMAND, null);
 		}
 		else if(args[0].equalsIgnoreCase("remove")){
 			if(args.length > 1)
-				Request.remove((Player)sender, Bukkit.getPlayer(args[0]));
+				Request.remove((Player)sender, Bukkit.getPlayer(MineUUID.getUUID(args[1])));
 			else
 				FriendMe.sendMessage((Player)sender, Type.INVALID_COMMAND, null);
 		}
@@ -58,7 +58,7 @@ public class FriendCommand implements CommandExecutor {
 			if(args.length < 2){
 				FriendMe.sendMessage((Player)sender, Type.INVALID_COMMAND, null);
 			} else {
-				if(!Friendship.isFriend(Bukkit.getPlayer(sender.getName()), Bukkit.getPlayer(args[1]))){
+				if(!Friendship.isFriend(Bukkit.getPlayer(MineUUID.getUUID(sender.getName())), Bukkit.getPlayer(MineUUID.getUUID(args[1])))){
 					sender.sendMessage(ChatColor.YELLOW + "You can only sent teleport requests to friends!");
 					return false;
 				}
@@ -67,11 +67,11 @@ public class FriendCommand implements CommandExecutor {
 					request.send();
 				}
 				else if(args[0].equalsIgnoreCase("accept")){
-					TeleportRequest request = TeleportRequest.byReceive(Bukkit.getPlayer(sender.getName()));
+					TeleportRequest request = TeleportRequest.byReceive(Bukkit.getPlayer(MineUUID.getUUID(sender.getName())));
 					request.accept();
 				}
 				else if(args[0].equalsIgnoreCase("deny")){
-					TeleportRequest request = TeleportRequest.byReceive(Bukkit.getPlayer(sender.getName()));
+					TeleportRequest request = TeleportRequest.byReceive(Bukkit.getPlayer(MineUUID.getUUID(sender.getName())));
 					request.deny();
 				}
 			}

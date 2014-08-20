@@ -18,3 +18,5 @@ bar-api: true
 bar-message: ''
 # How often to unload and load with the database
 unload-count: 1000
+# Should non-friends be hidden?
+hide-non-friends: false

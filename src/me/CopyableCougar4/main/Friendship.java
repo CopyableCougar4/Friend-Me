@@ -53,13 +53,13 @@ public class Friendship {
 	
 	public Player getSender(){
 		String username = DatabaseConn.getRecord(this.senderUUID);
-		Player sender = Bukkit.getPlayer(username);
+		Player sender = Bukkit.getPlayer(MineUUID.getUUID(username));
 		return sender;
 	}
 	
 	public Player getReceiver(){
 		String username = DatabaseConn.getRecord(this.receiverUUID);
-		Player receiver = Bukkit.getPlayer(username);
+		Player receiver = Bukkit.getPlayer(MineUUID.getUUID(username));
 		return receiver;
 	}
 	
