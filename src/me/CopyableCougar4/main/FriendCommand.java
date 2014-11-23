@@ -28,25 +28,28 @@ public class FriendCommand implements CommandExecutor {
 		}
 		if(args[0].equalsIgnoreCase("add")){
 			if(args.length > 1)
-				Request.send((Player)sender, Bukkit.getPlayer(MineUUID.getUUID(args[1])));
+				Request.send((Player)sender, PlayersOnline.getPlayer(MineUUID.getUUID(args[1]), args[1]));
 			else
 				FriendMe.sendMessage((Player)sender, Type.INVALID_COMMAND, null);
 		}
 		else if(args[0].equalsIgnoreCase("deny")){
 			if(args.length > 1)
-				Request.deny((Player)sender,  Bukkit.getPlayer(MineUUID.getUUID(args[1])));
+				// Request.deny((Player)sender,  PlayersOnline.getPlayer(MineUUID.getUUID(args[1]), args[1]));
+				Request.forward(MineUUID.getUUID(((Player)sender).getName()), args[1], "--");
 			else
 				FriendMe.sendMessage((Player)sender, Type.INVALID_COMMAND, null);
 		}
 		else if(args[0].equalsIgnoreCase("accept")){
 			if(args.length > 1)
-				Request.accept((Player)sender, Bukkit.getPlayer(MineUUID.getUUID(args[1])));
+				// Request.accept((Player)sender, PlayersOnline.getPlayer(MineUUID.getUUID(args[1]), args[1]));
+				Request.forward(MineUUID.getUUID(((Player)sender).getName()), args[1], "-+");
 			else
 				FriendMe.sendMessage((Player)sender, Type.INVALID_COMMAND, null);
 		}
 		else if(args[0].equalsIgnoreCase("remove")){
 			if(args.length > 1)
-				Request.remove((Player)sender, Bukkit.getPlayer(MineUUID.getUUID(args[1])));
+				// Request.remove((Player)sender, PlayersOnline.getPlayer(MineUUID.getUUID(args[1]), args[1]));
+				Request.forward(MineUUID.getUUID(((Player)sender).getName()), args[1], "-=");
 			else
 				FriendMe.sendMessage((Player)sender, Type.INVALID_COMMAND, null);
 		}
@@ -58,7 +61,7 @@ public class FriendCommand implements CommandExecutor {
 			if(args.length < 2){
 				FriendMe.sendMessage((Player)sender, Type.INVALID_COMMAND, null);
 			} else {
-				if(!Friendship.isFriend(Bukkit.getPlayer(MineUUID.getUUID(sender.getName())), Bukkit.getPlayer(MineUUID.getUUID(args[1])))){
+				if(!Friendship.isFriend(Bukkit.getPlayer(MineUUID.getUUID(sender.getName())), PlayersOnline.getPlayer(MineUUID.getUUID(args[1]), args[1]))){
 					sender.sendMessage(ChatColor.YELLOW + "You can only sent teleport requests to friends!");
 					return false;
 				}

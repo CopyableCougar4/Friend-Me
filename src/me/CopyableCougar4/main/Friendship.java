@@ -80,11 +80,11 @@ public class Friendship {
 		return this.requestStatus;
 	}
 	
-	public static boolean isFriend(Player test, Player check){
+	public static boolean isFriend(Player test, FPlayer check){
 		for(Friendship f : FriendMe.friendships){
-			if(f.getSender().equals(test) && f.getReceiver().equals(check))
+			if(f.getSender().equals(test) && f.getReceiver().equals(check.player))
 				return true;
-			if(f.getSender().equals(check) && f.getReceiver().equals(test))
+			if(f.getSender().equals(check.player) && f.getReceiver().equals(test))
 				return true;
 		}
 		return false;

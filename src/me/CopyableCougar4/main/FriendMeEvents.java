@@ -44,6 +44,7 @@ public class FriendMeEvents implements Listener {
 	
 	@EventHandler
 	public void onJoin(PlayerJoinEvent evt){
+		PlayersOnline.setStatus(MineUUID.getUUID(evt.getPlayer().getName()), true);
 		for(Player p : Bukkit.getOnlinePlayers()){
 			if(p.equals(evt.getPlayer()))
 				continue;
@@ -68,6 +69,7 @@ public class FriendMeEvents implements Listener {
 	
 	@EventHandler
 	public void onQuit(PlayerQuitEvent evt){
+		PlayersOnline.setStatus(MineUUID.getUUID(evt.getPlayer().getName()), false);
 		for(Player p : Bukkit.getOnlinePlayers()){
 			if(p.equals(evt.getPlayer()))
 				continue;

@@ -43,7 +43,7 @@ public class FriendChat implements Listener {
 		if(isToggled(event.getPlayer())){
 			// they have friend chat on
 			for(Player player : Bukkit.getOnlinePlayers()){
-				if(Friendship.isFriend(event.getPlayer(), player)){
+				if(Friendship.isFriend(event.getPlayer(), new FPlayer(player))){
 					continue;
 				} else {
 					event.getRecipients().remove(player);

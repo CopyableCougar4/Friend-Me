@@ -20,3 +20,7 @@ bar-message: ''
 unload-count: 1000
 # Should non-friends be hidden?
 hide-non-friends: false
+# public IP of this server
+server-ip: ''
+# IPs (with ports) of other servers on this network
+connected:

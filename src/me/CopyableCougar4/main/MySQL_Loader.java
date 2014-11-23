@@ -30,6 +30,14 @@ public class MySQL_Loader {
 	public static void unload(){
 		String table = FriendMe.getPlugin().getConfig().getString("mysql.table");
 		Connection connection = databaseConnection;
+		try {
+			if(connection.isClosed()){
+				System.out.println("Connection had to be rebuilt because the old connection was closed.");
+				prepare();
+			}
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+		}
 		for(Friendship friendship : FriendMe.friendships){
 			String sender = friendship.getSenderUUID().toString();
 			String receiver = friendship.getReceiverUUID().toString();
@@ -68,6 +76,14 @@ public class MySQL_Loader {
 		// get the resultset
 		String table = FriendMe.getPlugin().getConfig().getString("mysql.table");
 		Connection connection = databaseConnection;
+		try {
+			if(connection.isClosed()){
+				System.out.println("Connection had to be rebuilt because the old connection was closed.");
+				prepare();
+			}
+		} catch (SQLException e2) {
+			e2.printStackTrace();
+		}
 		try {
 			ResultSet resultSet = connection.createStatement().executeQuery("SELECT * FROM " + table);
 			while(resultSet.next()){

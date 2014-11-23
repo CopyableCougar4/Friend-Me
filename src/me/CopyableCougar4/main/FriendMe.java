@@ -13,6 +13,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.Listener;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import com.digiturtle.networking.Client;
+import com.digiturtle.networking.ClientHandler;
+
 public class FriendMe extends JavaPlugin implements Listener {
 
 	public static List<Friendship> friendships;
@@ -102,10 +105,13 @@ public class FriendMe extends JavaPlugin implements Listener {
 		try {
 			connection.prepareStatement("CREATE TABLE IF NOT EXISTS `userRecordUUID`(`userId` varchar(32), `username` varchar(32))").execute();
 			connection.prepareStatement("CREATE TABLE IF NOT EXISTS `" + table + "`(`sender` varchar(32), `receiver` varchar(32))").execute();
-		} catch (SQLException e) {
+			connection.prepareStatement("CREATE TABLE IF NOT EXISTS `onlineStatus`(`userID` varchar(32), `status` varchar(32))").execute();
+			} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		MySQL_Loader.cycle();
+		new ClientHandler(new Client()).start();
+		Request.initialize();
 	}
 	
 	public static void sendMessage(Player p, Type t, Player other){
